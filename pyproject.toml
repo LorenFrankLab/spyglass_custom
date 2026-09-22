@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "spyglass-custom"
+description = "Addendum to Spyglass"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Chris Brozdowski", email = "chris.broz@ucsf.edu" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = [
+    "neuroscience",
+    "research",
+    "electrophysiology",
+    "reproducible",
+    "data analysis",
+    "spike sorting",
+    "spikeinterface",
+    "datajoint",
+    "nwb",
+    "kachery",
+    "sortingview",
+]
+dependencies = [ "spyglass-neuro", "pre-commit", "python-dotenv" ]
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/LorenFrankLab/spyglass_custom"
+"Bug Tracker" = "https://github.com/LorenFrankLab/spyglass_custom/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+# this file is created/updated when the package is installed and used in
+# src/spyglass/__init__.py to set `spyglass.__version__`
+version-file = "src/spyglass_custom/_version.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = [".git_archival.txt"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/spyglass_custom"]
+exclude = []
+
+[tool.black]
+line-length = 80
+
+[tool.isort]
+profile = "black"
+
+[tool.codespell]
+skip = '.git,*.pdf,*.svg,*.ipynb,./docs/site/**'
+# Never - name in Citation
+ignore-words-list = 'nevers'
